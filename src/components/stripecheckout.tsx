@@ -40,7 +40,7 @@ const PRICING_DATA: PricingPlan[] = [
         subtitle: 'Pay monthly/billed annually',
         button: 'Select Professional',
         price: '',
-        plan: 'prod_RCEVgmGIs0DhSg',
+        plan: 'prod_RPQBukYOseyuUD',
         list: [
             "Unlimited project creation",
             "24/7 access",
@@ -70,7 +70,7 @@ const PRICING_DATA: PricingPlan[] = [
 ];
 
 // Constants
-const STRIPE_PUBLISHABLE_KEY = 'pk_test_51PxjW50608wKLaIL6SmF3X3M3e8HsXOoauIDNBKB5QJUkWwiatfFuLeRDr40zOsWrEC3MifY1XUTGkZLy6GEBURS00Bh0cXRfV';
+const STRIPE_PUBLISHABLE_KEY = 'pk_live_51PxjW50608wKLaILUdG67qGTO74EAMqX5V53sDXkQ7mTYAp02OtgI9eimgdhZTvws2cobeXsyWdhlodbpGZsGCcM00RCIPxotw';
 
 interface HeaderProps{
     user: User;
