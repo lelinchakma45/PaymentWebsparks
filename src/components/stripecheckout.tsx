@@ -36,7 +36,7 @@ const PRICING_DATA: PricingPlan[] = [
     },
     {
         id: 'Individual',
-        title: 'Professional $30/month',
+        title: 'Professional $15/month',
         subtitle: 'Pay monthly/billed annually',
         button: 'Select Professional',
         price: '',
