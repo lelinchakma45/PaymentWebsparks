@@ -23,32 +23,32 @@ const Header = () => {
 
   return (
     <>
-      <div className={`h-[55px] sticky top-0 z-10 flex items-center bg-[#121212] transition-shadow duration-300 ${
+      <div className={`h-[55px] sticky top-0 z-10 flex items-center bg-gray-900/70 backdrop-blur-md transition-all duration-300 ${
         hasShadow 
-          ? "shadow-lg" 
-          : "border-b border-[rgba(99,99,99,0.30)]"
+          ? "shadow-lg shadow-black/20" 
+          : ""
       }`}>
         <div className="container mx-auto px-4 flex justify-between items-center">
           <Link to={MAIN_URL} className="flex items-center cursor-pointer no-underline">
             <img src={Logo} alt="Logo" className="w-[30px]" />
-            <span className="text-white">WebSparks</span>
+            <span className="text-white ml-2 font-medium">WebSparks</span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden sm:block">
-            <Link to={`${MAIN_URL}/about`} className="px-2 py-[10px] text-white cursor-pointer no-underline">About</Link>
-            <Link to={`${MAIN_URL}/pricing`} className="px-2 py-[10px] text-white cursor-pointer no-underline">Pricing</Link>
-            <Link to={`${MAIN_URL}/blogs`} className="px-2 py-[10px] text-white cursor-pointer no-underline">Blogs</Link>
-            <Link to={`${MAIN_URL}/contact`} className="px-2 py-[10px] text-white cursor-pointer no-underline">Contact us</Link>
+          <div className="hidden sm:flex items-center space-x-6">
+            <Link to={`${MAIN_URL}/about`} className="text-white/90 hover:text-white transition-colors cursor-pointer no-underline">About</Link>
+            <Link to={`${MAIN_URL}/pricing`} className="text-white/90 hover:text-white transition-colors cursor-pointer no-underline">Pricing</Link>
+            <Link to={`${MAIN_URL}/blogs`} className="text-white/90 hover:text-white transition-colors cursor-pointer no-underline">Blogs</Link>
+            <Link to={`${MAIN_URL}/contact`} className="text-white/90 hover:text-white transition-colors cursor-pointer no-underline">Contact us</Link>
           </div>
 
           {/* Desktop Buttons */}
-          <div className="hidden sm:flex items-center gap-1">
-            <button onClick={()=> window.open(CHAT_URL)} className="flex items-center px-5 py-[5px] text-black bg-white border border-white rounded-full cursor-pointer normal-case">
+          <div className="hidden sm:flex items-center gap-3">
+            <button 
+              onClick={()=> window.open(CHAT_URL)} 
+              className="px-5 py-2 text-white/90 hover:text-white bg-white/10 hover:bg-white/15 backdrop-blur-sm border border-white/10 rounded-full cursor-pointer transition-all duration-300"
+            >
               Go Back to Chat
-            </button>
-            <button onClick={()=> window.open(MAIN_URL)} className="flex items-center px-5 py-[5px] text-[#b5b6ba] bg-gradient-to-r from-[#313135] to-[#1F2024] border border-[#49494a] rounded-full cursor-pointer normal-case">
-              See to About
             </button>
           </div>
 
@@ -57,7 +57,7 @@ const Header = () => {
             <img
               src={Menu}
               alt="Menu"
-              className="cursor-pointer"
+              className="cursor-pointer w-6 h-6"
               onClick={() => setIsDrawerOpen(true)}
             />
           </div>
@@ -67,32 +67,35 @@ const Header = () => {
       {/* Mobile Drawer */}
       {isDrawerOpen && (
         <div className="fixed inset-0 z-50">
-          <div className="absolute inset-0 bg-black bg-opacity-50" onClick={() => setIsDrawerOpen(false)} />
-          <div className="absolute right-0 top-0 h-full w-[300px] bg-white">
-            <div className="flex justify-between p-4">
+          <div 
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm" 
+            onClick={() => setIsDrawerOpen(false)} 
+          />
+          <div className="absolute right-0 top-0 h-full w-[300px] bg-gray-900/95 backdrop-blur-md border-l border-white/10">
+            <div className="flex justify-between items-center p-4 border-b border-white/10">
               <Link to={MAIN_URL} className="flex items-center">
                 <img src={Logo} alt="Logo" className="w-[30px]" />
-                <span className="mx-1">WebSparks</span>
+                <span className="ml-2 text-white font-medium">WebSparks</span>
               </Link>
               <img
                 src={Cross}
                 alt="Close"
-                className="w-6 h-6 bg-black cursor-pointer"
+                className="w-6 h-6 cursor-pointer text-white/70 hover:text-white transition-colors"
                 onClick={() => setIsDrawerOpen(false)}
               />
             </div>
-            <div className="flex flex-col p-4">
-              <Link to={`${MAIN_URL}/about`} className="px-2 py-[10px] text-white cursor-pointer no-underline">About</Link>
-              <Link to={`${MAIN_URL}/pricing`} className="px-2 py-[10px] text-white cursor-pointer no-underline">Pricing</Link>
-              <Link to={`${MAIN_URL}/blogs`} className="px-2 py-[10px] text-white cursor-pointer no-underline">Blogs</Link>
-              <Link to={`${MAIN_URL}/contact`} className="px-2 py-[10px] text-white cursor-pointer no-underline">Contact us</Link>
+            <div className="flex flex-col p-4 space-y-4">
+              <Link to={`${MAIN_URL}/about`} className="text-white/90 hover:text-white transition-colors cursor-pointer no-underline">About</Link>
+              <Link to={`${MAIN_URL}/pricing`} className="text-white/90 hover:text-white transition-colors cursor-pointer no-underline">Pricing</Link>
+              <Link to={`${MAIN_URL}/blogs`} className="text-white/90 hover:text-white transition-colors cursor-pointer no-underline">Blogs</Link>
+              <Link to={`${MAIN_URL}/contact`} className="text-white/90 hover:text-white transition-colors cursor-pointer no-underline">Contact us</Link>
             </div>
-            <div className="flex justify-center">
-              <button onClick={()=> window.open(CHAT_URL)} className="flex items-center px-5 py-[5px] text-black bg-white border border-white rounded-full cursor-pointer normal-case">
+            <div className="flex flex-col gap-3 p-4 border-t border-white/10">
+              <button 
+                onClick={()=> window.open(CHAT_URL)} 
+                className="w-full px-5 py-2 text-white/90 hover:text-white bg-white/10 hover:bg-white/15 backdrop-blur-sm border border-white/10 rounded-full cursor-pointer transition-all duration-300"
+              >
                 Go Back to Chat
-              </button>
-              <button onClick={()=> window.open(MAIN_URL)} className="flex items-center px-5 py-[5px] text-[#b5b6ba] bg-gradient-to-r from-[#313135] to-[#1F2024] border border-[#49494a] rounded-full cursor-pointer normal-case">
-                See to About
               </button>
             </div>
           </div>
