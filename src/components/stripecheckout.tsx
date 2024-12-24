@@ -40,13 +40,14 @@ const PRICING_DATA: PricingPlan[] = [
     },
     {
         id: 'Individual',
+        id2:'Yearly',
         title: 'Professional',
         subtitle: 'Everything you need to grow',
         button: 'Get Professional',
         monthlyPrice: '$15',
         yearlyPrice: '$144',
         monthlyPlanId: 'prod_RPQBukYOseyuUD', // Monthly plan ID
-        yearlyPlanId: 'prod_yearly_plan_id',   // Yearly plan ID
+        yearlyPlanId: 'prod_RSO2Ov4Pswv1Go',  // Yearly plan ID
         highlight: true,
         list: [
             "Unlimited project creation",
@@ -122,7 +123,7 @@ const Pricing: React.FC<HeaderProps> = ({ user, userPlan }) => {
                 body: JSON.stringify({
                     product_id: productId,
                     other_data: {
-                        plan_name: plan.id,
+                        plan_name: isYearly && plan.id2 ? plan.id2 : plan.id,
                         billing_period: isYearly ? 'yearly' : 'monthly'
                     }
                 }),
