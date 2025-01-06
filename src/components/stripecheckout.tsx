@@ -30,56 +30,96 @@ const PRICING_DATA: PricingPlan[] = [
         monthlyPlanId: 'null',
         yearlyPlanId: 'null',
         list: [
-            "1 hour daily access",
-            "Limited project creation",
-            "Free access to images, drawing tools",
-            "Web crawler functionality",
-            "Basic email support",
-            "Community forum access",
+            "Chat and generate content with Websparks",
+            "Limited access to file upload",
+            "Up to five Projects",
+            "Implement daily usage limits with an overarching monthly cap.",
+            "Use Crawler",
+            "Use Skatchboard",
+            "Standard voice mode",
         ],
     },
     {
-        id: 'Individual',
-        id2:'Yearly',
-        title: 'Professional',
+        id: 'Starter',
+        title: 'Starter',
         subtitle: 'Everything you need to grow',
-        button: 'Get Professional',
+        button: 'Get Starter',
         monthlyPrice: '$15',
-        yearlyPrice: '$144',
-        monthlyPlanId: 'prod_RPQBukYOseyuUD', // Monthly plan ID
-        yearlyPlanId: 'prod_RSO2Ov4Pswv1Go',  // Yearly plan ID
-        highlight: true,
+        yearlyPrice: '$162',
+        monthlyPlanId: 'prod_RCEVgmGIs0DhSg',
+        yearlyPlanId: 'prod_RSO2Ov4Pswv1Go',
         list: [
-            "Unlimited project creation",
-            "24/7 access",
-            "Free access to images and drawing tools",
-            "Advanced web crawler functionality",
-            "Higher usage limits",
-            "Priority enterprise-grade support",
+            "10x higher messaging limits",
+            "5x higher attachment size limits",
+            "No daily usage limits",
+            "Advanced voice mode",
+            "Unlimited code export ",
+            "Prompt Enhancer",
+            "Limited access to push from Github",
         ]
     },
     {
-        id: 'Enterprise',
-        title: 'Enterprise',
-        subtitle: 'Advanced features for teams',
-        button: 'Contact Sales',
-        monthlyPrice: 'Custom',
-        yearlyPrice: 'Custom',
-        monthlyPlanId: 'null',
-        yearlyPlanId: 'null',
+        id: 'Plus',
+        title: 'Plus',
+        subtitle: 'Everything you need to grow',
+        button: 'Get Plus',
+        monthlyPrice: '$65',
+        yearlyPrice: '$702',
+        monthlyPlanId: 'prod_RPQBukYOseyuUD',
+        yearlyPlanId: 'prod_RSO2Ov4Pswv1Go',
+        highlight: true,
         list: [
-            "Everything in Professional plan",
-            "Unlimited team members",
-            "Custom usage limits",
-            "Dedicated account manager",
-            "24/7 premium support",
-            "Custom training sessions",
-            "On-premises deployment options"
-        ],
+            "Everything in STARTER",
+            "High speed access ",
+            "100x higher messaging limits",
+            "15x higher attachment size limits",
+            "No daily usage limits",
+            "Unlimited code export ",
+            "Advanced Prompt Enhancer",
+        ]
     },
+    {
+        id: 'Pro',
+        title: 'Pro',
+        subtitle: 'Everything you need to grow',
+        button: 'Get Pro',
+        monthlyPrice: '$200',
+        yearlyPrice: '$2160',
+        monthlyPlanId: 'prod_RPQBukYOseyuUD',
+        yearlyPlanId: 'prod_RSO2Ov4Pswv1Go',
+        list: [
+            "Everything in Plus",
+            "Unlimited messaging limits",
+            "Unlimited Push to Github",
+            "10x higher attachment size limits",
+            "Expanded context window for longer inputs",
+            "Enhanced support & ongoing account management",
+        ]
+    },
+    // {
+    //     id: 'Enterprise',
+    //     title: 'Enterprise',
+    //     subtitle: 'Advanced features for teams',
+    //     button: 'Contact Sales',
+    //     monthlyPrice: 'Custom',
+    //     yearlyPrice: 'Custom',
+    //     monthlyPlanId: 'null',
+    //     yearlyPlanId: 'null',
+    //     list: [
+    //         "Custom messaging limits",
+    //         "A dedicated product specialist",
+    //         "Custom integrations",
+    //         "Dedicated support & account management",
+    //         "Expert architecture & debugging support",
+    //         "Enterprise data excluded from training by default & custom data retention windows.",
+    //         "Admin controls, domain verification, and analytics",
+    //         "Enhanced support & ongoing account management"
+    //     ],
+    // }
 ];
 
-const STRIPE_PUBLISHABLE_KEY = 'pk_live_51PxjW50608wKLaILUdG67qGTO74EAMqX5V53sDXkQ7mTYAp02OtgI9eimgdhZTvws2cobeXsyWdhlodbpGZsGCcM00RCIPxotw';
+// const STRIPE_PUBLISHABLE_KEY = 'pk_live_51PxjW50608wKLaILUdG67qGTO74EAMqX5V53sDXkQ7mTYAp02OtgI9eimgdhZTvws2cobeXsyWdhlodbpGZsGCcM00RCIPxotw';
+const STRIPE_PUBLISHABLE_KEY = 'pk_test_51PxjW50608wKLaIL6SmF3X3M3e8HsXOoauIDNBKB5QJUkWwiatfFuLeRDr40zOsWrEC3MifY1XUTGkZLy6GEBURS00Bh0cXRfV';
 
 interface HeaderProps {
     user: User;
@@ -90,7 +130,7 @@ const Pricing: React.FC<HeaderProps> = ({ user, userPlan }) => {
     const [isLoading, setIsLoading] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [stripePromise, setStripePromise] = useState<Promise<any> | null>(null);
-    const [isYearly, setIsYearly] = useState(true);
+    const [isYearly, setIsYearly] = useState(false);
     const [isMeetingOpen, setIsMeetingOpen] = useState(false);
 
     const { access_token } = useParams();
@@ -109,7 +149,7 @@ const Pricing: React.FC<HeaderProps> = ({ user, userPlan }) => {
 
         // Get the appropriate plan ID based on billing period
         const productId = isYearly ? plan.yearlyPlanId : plan.monthlyPlanId;
-        
+
         setIsLoading(productId);
         setError(null);
 
@@ -153,23 +193,21 @@ const Pricing: React.FC<HeaderProps> = ({ user, userPlan }) => {
             setIsMeetingOpen(true);
             return;
         }
-
         if (!access_token) {
             setError('Please log in to purchase a plan');
             return;
         }
-        
         const relevantPlanId = isYearly ? plan.yearlyPlanId : plan.monthlyPlanId;
         if (relevantPlanId === 'null') {
             return;
         }
-        
+
         await checkout(plan);
     };
 
     return (
         <div className="bg-gradient-to-b from-black via-gray-900 to-black text-white p-8 min-h-screen">
-            <div className="max-w-6xl mx-auto">
+            <div className="max-w-8xl mx-auto">
                 {error && (
                     <div className="bg-red-500/20 border border-red-500 text-white p-4 rounded-lg mb-6">
                         {error}
@@ -183,7 +221,6 @@ const Pricing: React.FC<HeaderProps> = ({ user, userPlan }) => {
                         </h2>
                         <p className="text-xl text-gray-400">Choose the perfect plan for your needs</p>
                     </div>
-
                     <div className="flex flex-col items-center gap-6 bg-gray-900/50 p-6 rounded-2xl backdrop-blur-lg border border-gray-800">
                         <div className="flex items-center gap-8">
                             <span className={`text-lg font-medium transition-colors ${!isYearly ? 'text-white' : 'text-gray-400'}`}>Monthly</span>
@@ -191,21 +228,20 @@ const Pricing: React.FC<HeaderProps> = ({ user, userPlan }) => {
                                 onClick={() => setIsYearly(!isYearly)}
                                 className="relative inline-flex h-8 w-16 items-center rounded-full transition-colors focus:outline-none bg-gradient-to-r from-blue-600 to-purple-600"
                             >
-                                <span className={`inline-block h-6 w-6 transform rounded-full bg-white shadow-lg transition-transform duration-300 ease-in-out ${
-                                    isYearly ? 'translate-x-9' : 'translate-x-1'
-                                }`} />
+                                <span className={`inline-block h-6 w-6 transform rounded-full bg-white shadow-lg transition-transform duration-300 ease-in-out ${isYearly ? 'translate-x-9' : 'translate-x-1'
+                                    }`} />
                             </button>
                             <div className="flex flex-col items-start">
                                 <span className={`text-lg font-medium transition-colors ${isYearly ? 'text-white' : 'text-gray-400'}`}>
                                     Yearly
                                 </span>
-                                <span className="text-sm text-green-400 font-medium">Save 20%</span>
+                                <span className="text-sm text-green-400 font-medium">Save 10%</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     {PRICING_DATA.map((item) => (
                         <div key={item.id} className={`relative group transition-transform duration-300 hover:-translate-y-2`}>
                             {item.highlight && (
@@ -214,7 +250,7 @@ const Pricing: React.FC<HeaderProps> = ({ user, userPlan }) => {
                                 </div>
                             )}
                             <div className={`h-full rounded-2xl p-8 transition-colors duration-300
-                                ${item.highlight 
+                                ${item.highlight
                                     ? 'bg-gradient-to-b from-blue-600/20 to-purple-600/20 border-2 border-blue-500/50 hover:border-blue-400'
                                     : 'bg-gray-900/50 border border-gray-800 hover:border-gray-700'
                                 }
@@ -233,7 +269,7 @@ const Pricing: React.FC<HeaderProps> = ({ user, userPlan }) => {
                                         )}
                                     </div>
                                 </div>
-                                
+
                                 <button
                                     onClick={() => handlePlanBuy(item)}
                                     disabled={isLoading === (isYearly ? item.yearlyPlanId : item.monthlyPlanId) || item.id === userPlan.name}
@@ -245,8 +281,8 @@ const Pricing: React.FC<HeaderProps> = ({ user, userPlan }) => {
                                         ${isLoading === (isYearly ? item.yearlyPlanId : item.monthlyPlanId) ? 'opacity-50 cursor-not-allowed' : ''}
                                     `}
                                 >
-                                    {isLoading === (isYearly ? item.yearlyPlanId : item.monthlyPlanId) ? 'Processing...' : 
-                                     item.id === userPlan.name ? 'Current Plan' : item.button}
+                                    {isLoading === (isYearly ? item.yearlyPlanId : item.monthlyPlanId) ? 'Processing...' :
+                                        item.id === userPlan.name ? 'Current Plan' : item.button}
                                 </button>
 
                                 <ul className="space-y-4">
@@ -261,14 +297,20 @@ const Pricing: React.FC<HeaderProps> = ({ user, userPlan }) => {
                         </div>
                     ))}
                 </div>
-
-                <p className="text-gray-500 text-sm text-center mt-12">
+                <div className='flex justify-center mt-10'>
+                    <div className='text-center'>
+                        <i className='bi bi-buildings text-3xl text-center '></i>
+                        <p className='text-[20px]'><span>Looking for <span className='font-bold'>Enterprise</span> plans?</span></p>
+                        <a href={`/${access_token}/meeting`} className='text-purple-400 font-bold'>Contact us for plan</a>
+                    </div>
+                </div>
+                <p className="text-gray-500 text-sm text-center mt-6">
                     Powered by Websparks Corporation
                 </p>
             </div>
-            <Meeting 
-                meetingOpen={isMeetingOpen} 
-                handleMeetingClose={() => setIsMeetingOpen(false)} 
+            <Meeting
+                meetingOpen={isMeetingOpen}
+                handleMeetingClose={() => setIsMeetingOpen(false)}
             />
         </div>
     );

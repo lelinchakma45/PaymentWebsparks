@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Logo from '../assets/logo.svg'
 import Menu from '../assets/menu.svg'
 import Cross from '../assets/cros.svg'
@@ -9,6 +9,7 @@ const Header = () => {
   const navigate = useNavigate();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [hasShadow, setHasShadow] = useState(false);
+  const { access_token } = useParams();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,17 +30,17 @@ const Header = () => {
           : ""
       }`}>
         <div className="container mx-auto px-4 flex justify-between items-center">
-          <Link to={MAIN_URL} className="flex items-center cursor-pointer no-underline">
+          <Link to={`/${access_token}`} className="flex items-center cursor-pointer no-underline">
             <img src={Logo} alt="Logo" className="w-[30px]" />
             <span className="text-white ml-2 font-medium">WebSparks</span>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden sm:flex items-center space-x-6">
-            <Link to={`${MAIN_URL}/about`} className="text-white/90 hover:text-white transition-colors cursor-pointer no-underline">About</Link>
-            <Link to={`${MAIN_URL}/pricing`} className="text-white/90 hover:text-white transition-colors cursor-pointer no-underline">Pricing</Link>
-            <Link to={`${MAIN_URL}/blogs`} className="text-white/90 hover:text-white transition-colors cursor-pointer no-underline">Blogs</Link>
-            <Link to={`${MAIN_URL}/contact`} className="text-white/90 hover:text-white transition-colors cursor-pointer no-underline">Contact us</Link>
+            <Link target="_blank" to={`${MAIN_URL}/about`} className="text-white/90 hover:text-white transition-colors cursor-pointer no-underline">About</Link>
+            {/* <Link target="_blank" to={`${MAIN_URL}/pricing`} className="text-white/90 hover:text-white transition-colors cursor-pointer no-underline">Pricing</Link> */}
+            <Link target="_blank" to={`${MAIN_URL}/blogs`} className="text-white/90 hover:text-white transition-colors cursor-pointer no-underline">Blogs</Link>
+            <Link target="_blank" to={`${MAIN_URL}/contact`} className="text-white/90 hover:text-white transition-colors cursor-pointer no-underline">Contact us</Link>
           </div>
 
           {/* Desktop Buttons */}

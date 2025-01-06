@@ -6,6 +6,7 @@ import Home from '../pages/Home';
 import MainLayout from '../layouts/MainLayout';
 import NotFound from '../pages/NotFound';
 import { API_BASE_URL } from '../config';
+import Calender from '../components/Calender';
 
 // Types and Interfaces
 interface AuthWrapperProps {
@@ -88,8 +89,12 @@ const router: RouteObject[] = [
     ),
     children: [
       { 
-        path: '/:access_token', 
+        path: '', // This matches exactly /:access_token
         element: <Home /> 
+      },
+      { 
+        path: '/:access_token/meeting', // Remove the leading slash to make it relative
+        element: <Calender /> 
       },
     ],
   },
