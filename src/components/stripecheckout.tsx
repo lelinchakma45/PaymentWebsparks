@@ -65,7 +65,7 @@ const PRICING_DATA: PricingPlan[] = [
         button: 'Get Plus',
         monthlyPrice: '$65',
         yearlyPrice: '$702',
-        monthlyPlanId: 'prod_RPQBukYOseyuUD',
+        monthlyPlanId: 'prod_RCEVgmGIs0DhSg',
         yearlyPlanId: 'prod_RSO2Ov4Pswv1Go',
         highlight: true,
         list: [
@@ -85,7 +85,7 @@ const PRICING_DATA: PricingPlan[] = [
         button: 'Get Pro',
         monthlyPrice: '$200',
         yearlyPrice: '$2160',
-        monthlyPlanId: 'prod_RPQBukYOseyuUD',
+        monthlyPlanId: 'prod_RCEVgmGIs0DhSg',
         yearlyPlanId: 'prod_RSO2Ov4Pswv1Go',
         list: [
             "Everything in Plus",
