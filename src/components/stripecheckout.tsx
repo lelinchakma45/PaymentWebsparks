@@ -45,9 +45,9 @@ const PRICING_DATA: PricingPlan[] = [
         subtitle: 'Everything you need to grow',
         button: 'Get Starter',
         monthlyPrice: '$15',
-        yearlyPrice: '$162',
-        monthlyPlanId: 'prod_RCEVgmGIs0DhSg',
-        yearlyPlanId: 'prod_RSO2Ov4Pswv1Go',
+        yearlyPrice: '$165',
+        monthlyPlanId: 'prod_RPYJNL2l8n3AuL',
+        yearlyPlanId: 'prod_RZGVvubI5eft1J',
         list: [
             "10x higher messaging limits",
             "5x higher attachment size limits",
@@ -65,8 +65,8 @@ const PRICING_DATA: PricingPlan[] = [
         button: 'Get Plus',
         monthlyPrice: '$65',
         yearlyPrice: '$702',
-        monthlyPlanId: 'prod_RCEVgmGIs0DhSg',
-        yearlyPlanId: 'prod_RSO2Ov4Pswv1Go',
+        monthlyPlanId: 'prod_RZGNYhpMeQQjjg',
+        yearlyPlanId: 'prod_RZGVicV6YZYdg5',
         highlight: true,
         list: [
             "Everything in STARTER",
@@ -85,8 +85,8 @@ const PRICING_DATA: PricingPlan[] = [
         button: 'Get Pro',
         monthlyPrice: '$200',
         yearlyPrice: '$2160',
-        monthlyPlanId: 'prod_RCEVgmGIs0DhSg',
-        yearlyPlanId: 'prod_RSO2Ov4Pswv1Go',
+        monthlyPlanId: 'prod_RZGPNn5TiPxAse',
+        yearlyPlanId: 'prod_RZGWBkP8zrgeWz',
         list: [
             "Everything in Plus",
             "Unlimited messaging limits",
@@ -118,8 +118,8 @@ const PRICING_DATA: PricingPlan[] = [
     // }
 ];
 
-// const STRIPE_PUBLISHABLE_KEY = 'pk_live_51PxjW50608wKLaILUdG67qGTO74EAMqX5V53sDXkQ7mTYAp02OtgI9eimgdhZTvws2cobeXsyWdhlodbpGZsGCcM00RCIPxotw';
-const STRIPE_PUBLISHABLE_KEY = 'pk_test_51PxjW50608wKLaIL6SmF3X3M3e8HsXOoauIDNBKB5QJUkWwiatfFuLeRDr40zOsWrEC3MifY1XUTGkZLy6GEBURS00Bh0cXRfV';
+const STRIPE_PUBLISHABLE_KEY = 'pk_live_51PxjW50608wKLaILUdG67qGTO74EAMqX5V53sDXkQ7mTYAp02OtgI9eimgdhZTvws2cobeXsyWdhlodbpGZsGCcM00RCIPxotw';
+// const STRIPE_PUBLISHABLE_KEY = 'pk_test_51PxjW50608wKLaIL6SmF3X3M3e8HsXOoauIDNBKB5QJUkWwiatfFuLeRDr40zOsWrEC3MifY1XUTGkZLy6GEBURS00Bh0cXRfV';
 
 interface HeaderProps {
     user: User;
