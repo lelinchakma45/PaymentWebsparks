@@ -46,7 +46,8 @@ const PRICING_DATA: PricingPlan[] = [
         button: 'Get Starter',
         monthlyPrice: '$15',
         yearlyPrice: '$165',
-        monthlyPlanId: 'prod_RPYJNL2l8n3AuL',
+        monthlyPlanId: 'prod_RZUsinaBtAifzC',
+        // monthlyPlanId: 'prod_RPYJNL2l8n3AuL',
         yearlyPlanId: 'prod_RZGVvubI5eft1J',
         list: [
             "10x higher messaging limits",
@@ -130,7 +131,7 @@ const Pricing: React.FC<HeaderProps> = ({ user, userPlan }) => {
     const [isLoading, setIsLoading] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [stripePromise, setStripePromise] = useState<Promise<any> | null>(null);
-    const [isYearly, setIsYearly] = useState(false);
+    const [isYearly, setIsYearly] = useState(true);
     const [isMeetingOpen, setIsMeetingOpen] = useState(false);
 
     const { access_token } = useParams();
