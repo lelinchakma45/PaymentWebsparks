@@ -46,7 +46,7 @@ const Home = () => {
             }
 
             try {
-                const response = await fetch(`${API_BASE_URL}/user/me`, {
+                const response = await fetch(`${API_BASE_URL}/user/me-new`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',

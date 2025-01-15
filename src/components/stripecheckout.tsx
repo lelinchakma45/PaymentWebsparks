@@ -46,8 +46,8 @@ const PRICING_DATA: PricingPlan[] = [
         button: 'Get Starter',
         monthlyPrice: '$15',
         yearlyPrice: '$165',
-        monthlyPlanId: 'prod_RZUsinaBtAifzC',
-        // monthlyPlanId: 'prod_RPYJNL2l8n3AuL',
+        // monthlyPlanId: 'prod_RZUsinaBtAifzC',
+        monthlyPlanId: 'prod_RZGMfEoz4FDR2g',
         yearlyPlanId: 'prod_RZGVvubI5eft1J',
         list: [
             "10x higher messaging limits",
