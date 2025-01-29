@@ -105,7 +105,7 @@ const router: RouteObject[] = [
     element: <NotFound /> 
   },
   { 
-    path: '/:access_token/success/:random', // Remove the leading slash to make it relative
+    path: '/success', // Remove the leading slash to make it relative
     element: <Loading />
   },
 ];
