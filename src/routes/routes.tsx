@@ -7,6 +7,7 @@ import MainLayout from '../layouts/MainLayout';
 import NotFound from '../pages/NotFound';
 import { API_BASE_URL } from '../config';
 import Calender from '../components/Calender';
+import Loading from '../components/Loading';
 
 // Types and Interfaces
 interface AuthWrapperProps {
@@ -40,7 +41,7 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({ children }) => {
           return;
         }
 
-        const response = await fetch(`${API_BASE_URL}/user/me`, {
+        const response = await fetch(`${API_BASE_URL}/user/me-new`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -96,11 +97,16 @@ const router: RouteObject[] = [
         path: '/:access_token/meeting', // Remove the leading slash to make it relative
         element: <Calender /> 
       },
+      
     ],
   },
   { 
     path: '*', 
     element: <NotFound /> 
+  },
+  { 
+    path: '/:access_token/success/:random', // Remove the leading slash to make it relative
+    element: <Loading />
   },
 ];
 
